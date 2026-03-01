@@ -4,10 +4,10 @@
 planning
 
 ## Last Updated
-2026-02-28T19:50:00Z
+2026-03-01T00:00:00Z
 
 ## Last Issue Processed
-#4 — Write database migration for users table and migration runner
+#7 — Implement AuthService for password hashing and JWT operations
 
 ## Decisions
 
@@ -17,6 +17,7 @@ planning
 - Issue #2: `config.js` uses `dotenv/config` import at module top; config object is frozen via `Object.freeze` to prevent accidental mutation at runtime.
 - Issue #2: `pool.js` imports config and constructs `pg.Pool` lazily (no active connection at import time); default export used so repositories can import with a single statement.
 - Issue #4: `migrate.js` uses ES module imports and runs each SQL file inside an explicit `BEGIN`/`COMMIT` transaction, rolling back on any error. The migrations tracking table is bootstrapped with `CREATE TABLE IF NOT EXISTS` before querying it so the runner is idempotent on first use.
+- Issue #7: `authService.js` centralises bcrypt and JWT operations; HTTP concerns are intentionally excluded from the service layer. `password_hash` is stripped from all returned user objects via a local helper. `login` uses a single `'Invalid credentials'` error message for both unknown email and wrong password to avoid user enumeration.
 
 ## Constraints
 
@@ -33,3 +34,4 @@ planning
 - #1 — Initialize project scaffold with package.json and directory structure
 - #2 — Implement database connection pool and environment config module
 - #4 — Write database migration for users table and migration runner
+- #7 — Implement AuthService for password hashing and JWT operations
