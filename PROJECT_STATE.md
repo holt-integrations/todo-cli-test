@@ -1,10 +1,10 @@
 # Project State
 
 ## Last Updated
-2026-03-01T00:00:00Z
+2026-03-01T01:00:00Z
 
 ## Last Issue Processed
-#9 — Implement auth router with register and login endpoints
+#10 — Assemble Express app and HTTP server entry point
 
 ## Completed Issues
 - #1
@@ -13,6 +13,7 @@
 - #7 — Implement AuthService for password hashing and JWT operations
 - #8 — Implement JWT authentication middleware
 - #9 — Implement auth router with register and login endpoints
+- #10 — Assemble Express app and HTTP server entry point
 
 ## Decisions
 - Using ES Modules (`"type": "module"`) throughout; no CommonJS `require()`.
@@ -25,6 +26,7 @@
 - Issue #7: `authService.js` uses named ES module exports; user objects strip `password_hash` via destructuring before returning to callers.
 - Issue #5: `errorHandler.js` uses `process.env.NODE_ENV` directly rather than importing `src/config.js`, since config does not expose a `nodeEnv` field; `err.status ?? err.statusCode ?? 500` handles both naming conventions.
 - Conflict resolution (#8 PR onto main): merged base branch state (through #9) with PR branch decisions for issues #5, #7, #8; preserved all decisions and augmented completed issues list.
+- Issue #10: `src/app.js` is side-effect-free at import time (no `listen`, no DB queries); `src/index.js` is the sole entry point that binds to a port. A minimal `/health` router was added at `src/routes/health.js` to satisfy the `/health` mount in `app.js`.
 
 ## Constraints
 - Node.js 20 engine required.
