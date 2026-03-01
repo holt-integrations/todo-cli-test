@@ -1,37 +1,20 @@
-# Project State: my-new-app
-
-## Phase
-planning
+# Project State
 
 ## Last Updated
-2026-02-28T19:43:00Z
+2026-02-28T00:00:00Z
 
 ## Last Issue Processed
-#2 — Implement database connection pool and environment config module
-
-## Decisions
-
-- Issue #2: `config.js` uses `dotenv/config` import at module top; config object is frozen via `Object.freeze` to prevent accidental mutation at runtime.
-- Issue #2: `pool.js` imports config and constructs `pg.Pool` lazily (no active connection at import time); default export used so repositories can import with a single statement.
-
-## Constraints
-
-- Runtime: Node.js 20 (LTS) — no polyfills for natively available features.
-- Module system: ES Modules (`"type": "module"`) throughout; no CommonJS `require()`.
-- Database: PostgreSQL 15+ — use `gen_random_uuid()` (no `uuid-ossp` extension needed).
-- No ORM: All SQL is written explicitly; `pg` pool is the only database abstraction.
-- Authentication: Stateless JWT only; no server-side session store in MVP scope.
-- Password storage: `bcrypt` with configurable rounds (default 12).
-- Scope: REST API backend only; no frontend, no caching layer, no message broker in MVP.
+#1 — Initialize project scaffold with package.json and directory structure
 
 ## Completed Issues
+- #1
 
-- #2 — Implement database connection pool and environment config module
+## Decisions
+- Using ES Modules (`"type": "module"`) throughout; no CommonJS `require()`.
+- Node.js 20 only — no polyfills for features available natively in Node 20.
+- No ORM (Sequelize, Prisma, TypeORM, etc.) — raw `pg` for database access.
 
-## Next Recommended Issue
-
-**Issue 0** — "Initialize project scaffold with package.json and directory structure"
-
-This is the foundational prerequisite for all other issues. Start here by creating
-`package.json`, `.env.example`, `.gitignore`, and the `src/` directory tree as described
-in `ISSUES.json` index 0.
+## Constraints
+- Node.js 20 engine required.
+- ES Modules only.
+- No ORM.
